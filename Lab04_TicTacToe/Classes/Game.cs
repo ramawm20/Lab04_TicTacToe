@@ -30,7 +30,42 @@ namespace Lab04_TicTacToe.Classes
 		/// <returns>Winner</returns>
 		public Player Play()
 		{
-			return Winner;
+			Player player = new Player();
+			int x = 0;
+			bool drawing = false;
+
+			while(!CheckForWinner(Board))
+			{
+				player = NextPlayer();
+				Board.DisplayBoard();
+				Position pos1 = player.GetPosition(Board);
+
+				if (Board.GameBoard[pos1.Row, pos1.Column] == "X" || Board.GameBoard[pos1.Row, pos1.Column] == "Y")
+				{
+					SwitchPlayer();
+					player=NextPlayer();
+					Console.WriteLine("already taken try another one");
+				}
+				Board.GameBoard[pos1.Row,pos1.Column] = player.Marker;
+				SwitchPlayer();
+				x++;
+
+				if(x==9 && !CheckForWinner(Board))
+				{
+					Console.Clear();
+					Console.WriteLine("opps!! No winners!");
+					drawing = true;
+					break;
+				}
+
+			}
+			if (!drawing)
+			{
+				Console.Clear();
+				Console.WriteLine($"Player {player.Name} Wonn!, Congrats");
+
+			}
+			return player;
 			//TODO: Complete this method and utilize the rest of the class structure to play the game.
 
             /*
@@ -83,6 +118,10 @@ namespace Lab04_TicTacToe.Classes
 				string c = Board.GameBoard[p3.Row, p3.Column];
 
 				// TODO:  Determine a winner has been reached. 
+				if (a==b&& b == c)
+				{
+					return true;
+				}
 				// return true if a winner has been reached. 
 			
 			}

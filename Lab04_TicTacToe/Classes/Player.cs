@@ -23,7 +23,7 @@ namespace Lab04_TicTacToe.Classes
 			Position desiredCoordinate = null;
 			while (desiredCoordinate is null)
 			{
-				Console.WriteLine("Please select a location");
+				Console.WriteLine($"Please select a location {Name}" );
 				Int32.TryParse(Console.ReadLine(), out int position);
 				desiredCoordinate = PositionForNumber(position);
 			}
